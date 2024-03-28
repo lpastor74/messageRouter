@@ -4,13 +4,10 @@ import ballerina/log;
 import ballerina/time;
 import ballerinax/kafka;
 
-
 configurable boolean moderate = ?;
 configurable boolean enableSlackNotification = ?;
 configurable string kafka_DEFAULT_URL = ?;
 configurable int messageRouterListenerPort = ?;
-
-
 
 listener http:Listener messageRouterListener = new (messageRouterListenerPort);
 
@@ -18,7 +15,6 @@ listener http:Listener messageRouterListener = new (messageRouterListenerPort);
 service MessageRouter /router on messageRouterListener {
     private final kafka:Producer messageProducer;
 
-    
     public function init() returns error? {
         log:printInfo("Message Router service started");
         self.messageProducer = check new (kafka:DEFAULT_URL);
@@ -26,7 +22,7 @@ service MessageRouter /router on messageRouterListener {
     }
 
     # Description.
-    #  Create a message into Kafka topic
+    # Create a message into Kafka topic
     # + newMessage - parameter description
     # + return - return value description
     resource function post message(NewMessage newMessage) returns http:Created|error {
@@ -41,12 +37,11 @@ service MessageRouter /router on messageRouterListener {
         return http:ACCEPTED;
     }
 
-   
     # Description.
     # + return - return value description
     public function createInterceptors() returns ResponseErrorInterceptor {
         return new ResponseErrorInterceptor();
-    }  
+    }
 }
 
 function buildErrorPayload(string msg, string path) returns ErrorDetails => {
