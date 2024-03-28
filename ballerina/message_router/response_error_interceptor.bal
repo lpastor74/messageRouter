@@ -13,7 +13,6 @@
 // KIND, either express or implied.  See the License for the
 // specific language governing permissions and limitations
 // under the License.
-
 import ballerina/constraint;
 import ballerina/http;
 
@@ -21,10 +20,10 @@ import ballerina/http;
 service class ResponseErrorInterceptor {
     *http:ResponseErrorInterceptor;
 
-    remote function interceptResponseError(http:RequestContext ctx, error err) 
+    remote function interceptResponseError(http:RequestContext ctx, error err)
             returns KafkaTopicBadRequest|KafkaServerError {
         ErrorDetails errorDetails = buildErrorPayload(err.message(), "");
-        
+
         if err is constraint:Error {
             KafkaTopicBadRequest kafkaTopicBadRequest = {
                 body: errorDetails

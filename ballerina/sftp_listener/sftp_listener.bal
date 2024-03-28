@@ -3,8 +3,6 @@ import ballerina/http;
 import ballerina/io;
 import ballerina/log;
 
-//import ballerina/time;
-
 final http:Client securedClient = check new (gwConfig.gwURL,
     auth = {
         tokenUrl: gwConfig.tokenUrl,
@@ -37,7 +35,6 @@ listener ftp:Listener remoteServer = check new ({
     fileNamePattern: sftpConfig.fileNamePattern
 });
 
-
 ftp:Client remoteClient = check new ({
     protocol: ftp:SFTP,
     host: "ftp.support.wso2.com",
@@ -61,15 +58,15 @@ service on remoteServer {
         foreach ftp:FileInfo newFile in event.addedFiles {
             log:printInfo("there is a file  ....");
             stream<byte[] & readonly, io:Error?> fileStream = check caller->get(newFile.pathDecoded);
-            Norad[] values = check readFile(fileStream);  
+            Norad[] values = check readFile(fileStream);
             Norad[] errors = [];
             foreach Norad msg in values {
                 //send message over client 
                 if (sendMsg2GW) {
                     error? response = securedClient->post("json", postToRouter(msg));
-                    if response is error{
-                          log:printError("Error occurred while connecting to the server", 'error = response);
-                          errors.push(msg);
+                    if response is error {
+                        log:printError("Error occurred while connecting to the server", 'error = response);
+                        errors.push(msg);
                     }
                 }
                 else {
@@ -77,8 +74,8 @@ service on remoteServer {
                 }
             }
 
-            if errors.length()>0{
-            // create a file and flush the messages
+            if errors.length() > 0 {
+                // create a file and flush the messages
                 check sendFile(errors);
             }
         }
@@ -95,13 +92,9 @@ isolated function readFile(stream<byte[] & readonly, io:Error?> fileStream) retu
 
 isolated function sendFile(Norad[] list) returns error? {
     //_= check remoteClient->put("/beauser/error/error.json", list.toJsonString()); 
-log:printInfo(list.toJsonString());
-
+    log:printInfo(list.toJsonString());
 
 }
-
-
-
 
 isolated function postToRouter(Norad norad) returns RoutherMessage => {
     norad_msg: norad,
