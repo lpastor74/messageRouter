@@ -18,10 +18,16 @@ type GW_Config record {|
 
 type SFTPConfig record {|
     string hostURL;
+    int port;
     string userName;
     string password;
     decimal pollingInterval;
+<<<<<<< HEAD
     string fileNamePattern;
+=======
+    string fileNamePattern ;
+    string path;
+>>>>>>> 3bd64ef (add more config)
 |};
 
 type Norad record {|

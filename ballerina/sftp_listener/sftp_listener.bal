@@ -29,8 +29,8 @@ listener ftp:Listener remoteServer = check new ({
             password: sftpConfig.password
         }
     },
-    port: 22,
-    path: "/beauser/in",
+    port: sftpConfig.port,
+    path: sftpConfig.path,
     pollingInterval: sftpConfig.pollingInterval,
     fileNamePattern: sftpConfig.fileNamePattern
 });
@@ -50,13 +50,13 @@ ftp:Client remoteClient = check new ({
 service on remoteServer {
 
     # Description.
-    #
+    # SFTP watcher 
     # + event - parameter description  
     # + caller - parameter description
     # + return - return value description
     isolated remote function onFileChange(ftp:WatchEvent & readonly event, ftp:Caller caller) returns error? {
         foreach ftp:FileInfo newFile in event.addedFiles {
-            log:printInfo("there is a file  ....");
+            log:printInfo("File "+newFile.pathDecoded+" identified");
             stream<byte[] & readonly, io:Error?> fileStream = check caller->get(newFile.pathDecoded);
             Norad[] values = check readFile(fileStream);
             Norad[] errors = [];
@@ -74,8 +74,14 @@ service on remoteServer {
                 }
             }
 
+<<<<<<< HEAD
             if errors.length() > 0 {
                 // create a file and flush the messages
+=======
+            if errors.length()>0{
+            // create a file and flush the messages
+            log:printInfo("Some message couldn't be send and were recorded if error folder");
+>>>>>>> 3bd64ef (add more config)
                 check sendFile(errors);
             }
         }
