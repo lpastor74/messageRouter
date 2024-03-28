@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="FileParserCSV" onError="ErrorLog" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom">
+        <property name="Message " value="----------   CSV   ---------"/>
+    </log>
+    <CSV.csvToJson>
+        <headerPresent>Present</headerPresent>
+        <skipHeader>true</skipHeader>
+        <csvEmptyValues>Null</csvEmptyValues>
+        <rootJsonKey>results</rootJsonKey>
+    </CSV.csvToJson>
+    <header name="Content-Type" scope="transport" value="application/json"/>
+    <call>
+        <endpoint>
+            <http method="post" uri-template="http://localhost:8392/message/0.1/csv">
+                <suspendOnFailure>
+                    <initialDuration>-1</initialDuration>
+                    <progressionFactor>1</progressionFactor>
+                </suspendOnFailure>
+                <markForSuspension>
+                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                </markForSuspension>
+                <authentication>
+                    <oauth>
+                        <clientCredentials>
+                            <clientId>8PQt3cLdAmIGvSaNgzf1uqyFAXga</clientId>
+                            <clientSecret>BJYjSkogVok_zKPKviUdgeyts6wa</clientSecret>
+                            <tokenUrl>https://localhost:9555/oauth2/token</tokenUrl>
+                            <authMode>header</authMode>
+                        </clientCredentials>
+                    </oauth>
+                </authentication>
+            </http>
+        </endpoint>
+    </call>
+    <drop/>
+</sequence>

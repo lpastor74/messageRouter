@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/message" name="MessageRouting" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST" uri-template="/tle">
+        <inSequence>
+            <log description="Full data payload" level="full"/>
+            <foreach expression="json-eval($.tleMessage)">
+                <sequence>
+                    <kafkaTransport.publishMessages configKey="KafkaTLEConnection">
+                        <topic>PriorityLine1</topic>
+                        <partitionNo>0</partitionNo>
+                    </kafkaTransport.publishMessages>
+                </sequence>
+            </foreach>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="POST" uri-template="/json-multi">
+        <inSequence>
+            <foreach expression="json-eval($.)">
+                <sequence>
+                    <kafkaTransport.publishMessages configKey="KafkaTLEConnection">
+                        <topic>PriorityLine2</topic>
+                        <partitionNo>0</partitionNo>
+                    </kafkaTransport.publishMessages>
+                </sequence>
+            </foreach>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="POST" uri-template="/json">
+        <inSequence>
+            <log description="Full data payload" level="full"/>
+            <kafkaTransport.publishMessages configKey="KafkaTLEConnection">
+                <topic>PriorityLine2</topic>
+                <partitionNo>0</partitionNo>
+            </kafkaTransport.publishMessages>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="POST" uri-template="/xml">
+        <inSequence>
+            <foreach expression="//item">
+                <sequence>
+                    <kafkaTransport.publishMessages configKey="KafkaTLEConnection">
+                        <topic>PriorityLine3</topic>
+                        <partitionNo>0</partitionNo>
+                    </kafkaTransport.publishMessages>
+                </sequence>
+            </foreach>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="POST" uri-template="/csv">
+        <inSequence>
+            <foreach expression="json-eval($.results)">
+                <sequence>
+                    <kafkaTransport.publishMessages configKey="KafkaTLEConnection">
+                        <topic>PriorityLine4</topic>
+                        <partitionNo>0</partitionNo>
+                    </kafkaTransport.publishMessages>
+                </sequence>
+            </foreach>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="MessageRouting" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/MessageRouting.xml</file>
+    </artifact>
+    <artifact name="HandleETLparsing_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/HandleETLparsing_swagger.yaml</file>
+    </artifact>
+    <artifact name="HandleETLparsing_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/HandleETLparsing_metadata.yaml</file>
+    </artifact>
+    <artifact name="KafkaTLEConnection" groupId="com.example.local-entry" version="1.0.0" type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>/src/main/synapse-config/local-entries/KafkaTLEConnection.xml</file>
+    </artifact>
+    <artifact name="KaflaConsumer" groupId="com.example.inbound-endpoint" version="1.0.0" type="synapse/inbound-endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/inbound-endpoints/KaflaConsumer.xml</file>
+    </artifact>
+    <artifact name="ErrorLog" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/ErrorLog.xml</file>
+    </artifact>
+    <artifact name="SFTPEP" groupId="com.example.inbound-endpoint" version="1.0.0" type="synapse/inbound-endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/inbound-endpoints/SFTPEP.xml</file>
+    </artifact>
+    <artifact name="FFTPEP_CSV" groupId="com.example.inbound-endpoint" version="1.0.0" type="synapse/inbound-endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/inbound-endpoints/FFTPEP_CSV.xml</file>
+    </artifact>
+    <artifact name="FFTPEP_JSON" groupId="com.example.inbound-endpoint" version="1.0.0" type="synapse/inbound-endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/inbound-endpoints/FFTPEP_JSON.xml</file>
+    </artifact>
+    <artifact name="FFTPEP_XML" groupId="com.example.inbound-endpoint" version="1.0.0" type="synapse/inbound-endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/inbound-endpoints/FFTPEP_XML.xml</file>
+    </artifact>
+    <artifact name="FFTPEP_TLE" groupId="com.example.inbound-endpoint" version="1.0.0" type="synapse/inbound-endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/inbound-endpoints/FFTPEP_TLE.xml</file>
+    </artifact>
+    <artifact name="FileParserXML" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/FileParserXML.xml</file>
+    </artifact>
+    <artifact name="FileParserJSON" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/FileParserJSON.xml</file>
+    </artifact>
+    <artifact name="FileParserCSV" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/FileParserCSV.xml</file>
+    </artifact>
+    <artifact name="FileParserTLE" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/FileParserTLE.xml</file>
+    </artifact>
+    <artifact name="SFTP" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/SFTP.xml</file>
+    </artifact>
+    <artifact name="SFTP_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/SFTP_swagger.yaml</file>
+    </artifact>
+    <artifact name="SFTP_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/SFTP_metadata.yaml</file>
+    </artifact>
+    <artifact name="SFILE_CONNECT" groupId="com.example.local-entry" version="1.0.0" type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>/src/main/synapse-config/local-entries/SFILE_CONNECT.xml</file>
+    </artifact>
+    <artifact name="InfoLog" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/InfoLog.xml</file>
+    </artifact>
+</artifacts>

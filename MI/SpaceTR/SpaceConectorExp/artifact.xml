@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="kafkaTransport-connector" groupId="com.example.lib" version="3.1.6" type="synapse/lib" serverRole="EnterpriseServiceBus">
+        <file>kafkaTransport-connector-3.1.6.zip</file>
+    </artifact>
+    <artifact name="kafkaTransport-connector" groupId="com.example.lib" version="3.2.0" type="synapse/lib" serverRole="EnterpriseServiceBus">
+        <file>kafkaTransport-connector-3.2.0.zip</file>
+    </artifact>
+    <artifact name="CSV-connector" groupId="com.example.lib" version="1.0.5" type="synapse/lib" serverRole="EnterpriseServiceBus">
+        <file>CSV-connector-1.0.5.zip</file>
+    </artifact>
+    <artifact name="file-connector" groupId="com.example.lib" version="4.0.20" type="synapse/lib" serverRole="EnterpriseServiceBus">
+        <file>file-connector-4.0.20.zip</file>
+    </artifact>
+</artifacts>

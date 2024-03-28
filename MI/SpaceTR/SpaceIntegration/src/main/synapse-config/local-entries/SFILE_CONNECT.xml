@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localEntry key="SFILE_CONNECT" xmlns="http://ws.apache.org/ns/synapse">
+    <file.init>
+        <strictHostKeyChecking>false</strictHostKeyChecking>
+        <connectionType>SFTP</connectionType>
+        <password>yyyyy</password>
+        <host>ftp.xxx.yyy.com</host>
+        <fileLockScheme>Local</fileLockScheme>
+        <workingDir>beauser/in??transport.vfs.AvoidPermissionCheck=true</workingDir>
+        <sftpConnectionTimeout>100000</sftpConnectionTimeout>
+        <setAvoidPermission>false</setAvoidPermission>
+        <userDirIsRoot>true</userDirIsRoot>
+        <port>22</port>
+        <name>SFILE_CONNECT</name>
+        <sftpSessionTimeout>150000</sftpSessionTimeout>
+        <username>beauser</username>
+    </file.init>
+</localEntry>

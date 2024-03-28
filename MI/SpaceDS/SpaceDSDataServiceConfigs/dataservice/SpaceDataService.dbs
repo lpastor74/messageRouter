@@ -1,0 +1,126 @@
+<data name="SpaceDataService" serviceNamespace="http://ws.wso2.org/dataservice/samples/json_sample" transports="http https">
+  <description>Exposing the Space data service as a REST service.</description>
+  <config id="default">
+    <property name="driverClassName">com.mysql.jdbc.Driver</property>
+    <property name="url">jdbc:mysql://localhost:33063/SpaceDB</property>
+    <property name="org.wso2.ws.dataservice.user">root</property>
+    <property name="org.wso2.ws.dataservice.password">root</property>
+  </config>
+  <resource method="GET" path="example">
+    <description />
+    <call-query href="ReadExample" />
+  </resource>
+  <resource method="POST" path="example">
+    <call-query href="CreateExample">
+      <with-param name="event_name" query-param="event_name" />
+      <with-param name="msg" query-param="msg" />
+    </call-query>
+  </resource>
+  <resource method="PUT" path="example">
+    <call-query href="UpdateExample">
+      <with-param name="msg" query-param="msg" />
+      <with-param name="GUID" query-param="GUID" />
+    </call-query>
+  </resource>
+  <resource method="DELETE" path="example">
+    <call-query href="DeleteExample">
+      <with-param name="GUID" query-param="GUID" />
+    </call-query>
+  </resource>
+  <resource method="GET" path="json">
+    <description />
+    <call-query href="ReadJSON" />
+  </resource>
+  <resource method="POST" path="json">
+    <call-query href="CreateJSON">
+      <with-param name="msg" query-param="msg" />
+    </call-query>
+  </resource>
+  <resource method="PUT" path="json">
+    <call-query href="UpdateJSON">
+      <with-param name="msg" query-param="msg" />
+      <with-param name="GUID" query-param="GUID" />
+    </call-query>
+  </resource>
+  <resource method="DELETE" path="json">
+    <call-query href="DeleteJSON">
+      <with-param name="GUID" query-param="GUID" />
+    </call-query>
+  </resource>
+  <resource method="GET" path="xml">
+    <description />
+    <call-query href="ReadXML" />
+  </resource>
+  <resource method="POST" path="xml">
+    <call-query href="CreateXML">
+      <with-param name="msg" query-param="msg" />
+    </call-query>
+  </resource>
+  <resource method="PUT" path="xml">
+    <call-query href="UpdateXML">
+      <with-param name="msg" query-param="msg" />
+      <with-param name="GUID" query-param="GUID" />
+    </call-query>
+  </resource>
+  <resource method="DELETE" path="xml">
+    <call-query href="DeleteXML">
+      <with-param name="GUID" query-param="GUID" />
+    </call-query>
+  </resource>
+  <query id="ReadExample" useConfig="default">
+    <sql>SELECT event_name, event_timestamp, GUID, msg FROM example_table;</sql>
+    <result outputType="json"> {"Messages":{"message":[ {"name":"$event_name","timestamp":"$event_timestamp","GUID":"$GUID","value":"$msg"}]}} </result>
+  </query>
+  <query id="CreateExample" useConfig="default">
+    <sql>INSERT INTO example_table (event_name, msg) VALUES (:event_name, :msg)</sql>
+    <param name="event_name" paramType="SCALAR" sqlType="STRING" />
+    <param name="msg" paramType="SCALAR" sqlType="STRING" />
+  </query>
+  <query id="UpdateExample" useConfig="default">
+    <sql>UPDATE example_table SET  msg = :msg WHERE GUID = :GUID</sql>
+    <param name="msg" paramType="SCALAR" sqlType="STRING" />
+    <param name="GUID" paramType="SCALAR" sqlType="STRING" />
+  </query>
+  <query id="DeleteExample" useConfig="default">
+    <sql>DELETE FROM example_table WHERE GUID = :GUID</sql>
+    <param name="GUID" paramType="SCALAR" sqlType="STRING" />
+  </query>
+  <query id="ReadJSON" useConfig="default">
+    <sql>SELECT  event_timestamp, GUID, msg FROM JSONMsg;</sql>
+    <result outputType="json"> {"Messages":{"message":[ {"timestamp":"$event_timestamp","GUID":"$GUID","value":"$msg"}]}} </result>
+  </query>
+  <query id="CreateJSON" useConfig="default">
+    <sql>INSERT INTO JSONMsg (msg) VALUES (:msg)</sql>
+    <param name="msg" paramType="SCALAR" sqlType="STRING" />
+  </query>
+  <query id="UpdateJSON" useConfig="default">
+    <sql>UPDATE JSONMsg SET  msg = :msg WHERE GUID = :GUID</sql>
+    <param name="msg" paramType="SCALAR" sqlType="STRING" />
+    <param name="GUID" paramType="SCALAR" sqlType="STRING" />
+  </query>
+  <query id="DeleteJSON" useConfig="default">
+    <sql>DELETE FROM JSONMsg WHERE GUID = :GUID</sql>
+    <param name="GUID" paramType="SCALAR" sqlType="STRING" />
+  </query>
+  <query id="ReadXML" useConfig="default">
+    <sql>SELECT  event_timestamp, GUID, msg FROM XMLMsg;</sql>
+    <result outputType="xml" element="Messages" rowName="message">
+      <element name="event_timestamp" xsdType="string" requiredRoles="" />
+      <element name="GUID" xsdType="string" requiredRoles="" />
+      <element name="msg" xsdType="string" requiredRoles="" />
+    </result>
+  </query>
+  <query id="CreateXML" useConfig="default">
+    <sql>INSERT INTO XMLMsg (msg) VALUES (:msg)</sql>
+    <param name="msg" paramType="SCALAR" sqlType="BLOB" type="IN" optional="false" />
+  </query>
+  <query id="UpdateXML" useConfig="default">
+    <sql>UPDATE XMLMsg SET  msg = :msg WHERE GUID = :GUID</sql>
+    <param name="msg" paramType="SCALAR" sqlType="STRING" />
+    <param name="GUID" paramType="SCALAR" sqlType="STRING" />
+  </query>
+  <query id="DeleteXML" useConfig="default">
+    <sql>DELETE FROM XMLMsg WHERE GUID = :GUID</sql>
+    <param name="GUID" paramType="SCALAR" sqlType="STRING" />
+  </query>
+</data>

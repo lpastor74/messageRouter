@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="FileParserTLE" onError="ErrorLog" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="full">
+        <property name="Message " value="----------   TLE   ---------"/>
+    </log>
+    <script language="js"><![CDATA[// Assuming the payload is already a string, directly work with it
+        var tleData = mc.getPayloadXML().toString();
+        var lines = tleData.split('\n');
+        
+        // Iterate through lines, combining and logging every two lines as one message
+        for (var i = 0; i < lines.length; i += 2) {
+            // Prepare the combined message
+            var combinedMessage = "";
+            
+            // Check and add the first line of the set, if it exists and is not empty
+            if (lines[i] && lines[i].trim() !== '') {
+                combinedMessage += lines[i].trim();
+            }
+            
+            // Check and add the second line of the set, if it exists and is not empty
+            if (i + 1 < lines.length && lines[i + 1].trim() !== '') {
+                // Add a separator between the lines if the first line was added
+                if (combinedMessage !== "") {
+                    combinedMessage += " | ";
+                }
+                combinedMessage += lines[i + 1].trim();
+            }
+            
+            // If the combined message is not empty, log it
+            if (combinedMessage !== "") {
+                var logMessage = "Combined TLE Set: " + combinedMessage;
+                mc.getServiceLog().info(logMessage);
+            }
+        }]]></script>
+    <log level="custom">
+        <property expression="get-property('combinedTLEMessages')" name="Combined TLE Messages"/>
+    </log>
+    <drop/>
+</sequence>
