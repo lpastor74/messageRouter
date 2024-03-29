@@ -2,7 +2,7 @@
 org = "laslopastor"
 name = "message_router"
 version = "0.1.0"
-distribution = "2201.8.4"
+distribution = "2201.8.6"
 
 [build-options]
 observabilityIncluded = true
