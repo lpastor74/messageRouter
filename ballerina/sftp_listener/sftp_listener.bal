@@ -74,14 +74,9 @@ service on remoteServer {
                 }
             }
 
-<<<<<<< HEAD
-            if errors.length() > 0 {
-                // create a file and flush the messages
-=======
             if errors.length()>0{
             // create a file and flush the messages
             log:printInfo("Some message couldn't be send and were recorded if error folder");
->>>>>>> 3bd64ef (add more config)
                 check sendFile(errors);
             }
         }

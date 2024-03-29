@@ -22,12 +22,8 @@ type SFTPConfig record {|
     string userName;
     string password;
     decimal pollingInterval;
-<<<<<<< HEAD
     string fileNamePattern;
-=======
-    string fileNamePattern ;
     string path;
->>>>>>> 3bd64ef (add more config)
 |};
 
 type Norad record {|
