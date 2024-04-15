@@ -32,7 +32,7 @@ service MessageRouter /router on messageRouterListener {
     resource function post 'json(RoutherMessage singlItem) returns http:Accepted|error {
         check self.messageProducer->send({
             topic: singlItem.topic,
-            value: singlItem.norad_msg
+            value: singlItem.'value
         });
         return http:ACCEPTED;
     }

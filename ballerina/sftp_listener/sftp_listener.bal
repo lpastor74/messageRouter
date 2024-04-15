@@ -98,7 +98,7 @@ isolated function sendFile(Norad[] list) returns error? {
 }
 
 isolated function postToRouter(Norad norad) returns RoutherMessage => {
-    norad_msg: norad,
+    'value: norad,
     topic: kafkaConfig.kafkaTopic,
     priority: kafkaConfig.priorityLevel
 };
