@@ -63,7 +63,7 @@ service on remoteServer {
             foreach Norad msg in values {
                 //send message over client 
                 if (sendMsg2GW) {
-                    error? response = securedClient->post("json", postToRouter(msg));
+                    http:Response|error response = securedClient->/'json.post(postToRouter(msg));
                     if response is error {
                         log:printError("Error occurred while connecting to the server", 'error = response);
                         errors.push(msg);
@@ -98,7 +98,7 @@ isolated function sendFile(Norad[] list) returns error? {
 }
 
 isolated function postToRouter(Norad norad) returns RoutherMessage => {
-    norad_msg: norad,
+    'value: norad,
     topic: kafkaConfig.kafkaTopic,
     priority: kafkaConfig.priorityLevel
 };
